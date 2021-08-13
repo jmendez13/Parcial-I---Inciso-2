@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="estilo.css"/>
+    <title>Parcial I</title>
+  </head>
+  
+  <script>
+ 
+	function calcular()
+	{
+		let codigo, sueldo, comisiones, descuentos, igss, isr, sueldoLiquido, calcularIgss, calcularIsr, totalDescuentos;
+		
+		codigo = parseFloat (document.formulario.codigo.value);
+		var nombre = document.formulario.nombre.value;
+		sueldo = parseFloat (document.formulario.sueldo.value);
+		comisiones = parseFloat (document.formulario.comisiones.value);
+		descuentos = parseFloat (document.formulario.descuentos.value);
+		igss = parseFloat (document.formulario.igss.value);
+		isr = parseFloat (document.formulario.isr.value); 
+		
+		calcularIgss = (sueldo * igss) * 0.01;
+		calcularIsr = ((sueldo + comisiones) * isr) * 0.01;
+		
+		totalDescuentos = descuentos + calcularIgss + calcularIsr;
+		
+		sueldoLiquido = (sueldo + comisiones) - totalDescuentos;
+		
+		document.formulario.codigoR.value = codigo;
+		document.formulario.nombreR.value = nombre;
+		document.formulario.sueldoR.value = sueldo;
+		document.formulario.sueldoLiquido.value = sueldoLiquido;
+		document.formulario.totalDescuento.value = totalDescuentos;
+	}
+  </script>
+  
+  <body>
+    <h5>Formulario</h5>
+	
+	<form name="formulario" method="post">
+	<fieldset>
+    <legend>Ingreso de Datos</legend>
+	<p>Codigo Empleado: <input type="number" name="codigo"></p>
+    <p>Nombre: <input type="text" name="nombre"></p>
+    <p>Sueldo Base: <input type="number" name="sueldo"></p>
+	<p>Comisiones: <input type="number" name="comisiones"></p>
+	<p>Descuentos Judiciales: (Opcional) <input type="number" name="descuentos"></p>
+	<p>Porcentaje del descuento del IGSS: <input type="number" name="igss"> %</p>
+	<p>Porcentaje del descuento de ISR: <input type="number" name="isr"> %</p>
+	
+    </fieldset>
+	
+	<p>
+    <input type="submit" value="Calcular Sueldo" onclick="calcular();"/>
+    <input type="reset" value="Borrar"/>
+    </p>
+	<br>
+	<fieldset>
+    <legend>Resultado</legend>
+	<p>Codigo Empleado: <input type="text" name="codigoR" placeholder="Resultado" disabled></p>
+    <p>Nombre: <input type="text" name="nombreR" placeholder="Resultado" disabled></p>
+    <p>Sueldo Base: <input type="text" name="sueldoR" placeholder="Resultado" disabled></p>
+	<p>Sueldo Liquido: <input type="text" name="sueldoLiquido" placeholder="Resultado" disabled></p>
+	<p>Total Descuentos: <input type="text" name="totalDescuento" placeholder="Resultado" disabled></p>
+    </fieldset>
+	
+	</form>
+  </body>
+</html>
